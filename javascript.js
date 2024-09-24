@@ -23,26 +23,26 @@ function playGame() {
         function playRound(humanChoice, computerChoice) {
             if (humanChoice == "Paper" & computerChoice =="Rock") {
                 ++humanScore;
-                return console.log(`You Win! Paper beats Rock.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}`);
+                return console.log(`You Win! Paper beats Rock.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}\nRound: ${i}/5`);
             }else if (humanChoice == "Paper" & computerChoice =="Scissors") {
                 ++computerScore;
-                return console.log(`You Lose! Scissors beats Paper.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}`);
+                return console.log(`You Lose! Scissors beats Paper.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}\nRound: ${i}/5`);
             }else if (humanChoice == "Rock" & computerChoice =="Paper") {
                 ++computerScore;
-                return console.log(`You Lose! Paper beats Rock.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}`);
+                return console.log(`You Lose! Paper beats Rock.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}\nRound: ${i}/5`);
             }else if (humanChoice == "Rock" & computerChoice =="Scissors") {
                 ++humanScore;
-                return console.log(`You Win! Rock beats Scissors.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}`);
+                return console.log(`You Win! Rock beats Scissors.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}\nRound: ${i}/5`);
             }else if (humanChoice == "Scissors" & computerChoice =="Paper") {
                 ++humanScore;
-                return console.log(`You Win! Scissors beats Paper.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}`);
+                return console.log(`You Win! Scissors beats Paper.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}\nRound: ${i}/5`);
             }else if (humanChoice == "Scissors" & computerChoice =="Rock") {
                 ++computerScore;
-                return console.log(`You Lose! Rock beats Scissors.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}`);
+                return console.log(`You Lose! Rock beats Scissors.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}\nRound: ${i}/5`);
+            }else if (humanChoice == computerChoice) {
+                return console.log(`WoW! You both picked the same.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}\nRound: ${i}/5`);
             }else {
-                ++humanScore;
-                ++computerScore;
-                return console.log(`WoW! You both picked the same.\n\nYour Score: ${humanScore} | Computer Score: ${computerScore}`);
+                return console.log(`You did mistake. Try again.`), --i;
             }
         }
         playRound(humanChoice, computerChoice);
