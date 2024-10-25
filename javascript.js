@@ -1,3 +1,5 @@
+const gameInfo = document.querySelector("div");
+
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3); 
     if  (randomNumber == 0) {
@@ -27,12 +29,12 @@ function playRound(humanChoice, scores) {
         computerScore++;
         result = `${computerChoice} beats ${humanChoice}. You lose!`;
     }
-    console.log(`${result}\nYour Score: ${humanScore} | Computer Score: ${computerScore}`);
+    gameInfo.innerHTML = `${result}<br>Your Score: ${humanScore} | Computer Score: ${computerScore}`;
     if (humanScore == 5 || computerScore == 5) {
         if (humanScore > computerScore) {
-            console.log(`Congratulation! You Win this game.`);
+            gameInfo.innerHTML =`Congratulation! You Win this game.<br>If u wanna try again just push any button.`;
         }else {
-            console.log(`Oh No! You Lose this game.`);
+            gameInfo.innerHTML =`Oh No! You Lose this game.<br>If u wanna try again just push any button.`;
         }
         return { gameOver: true, humanScore, computerScore};
     }
