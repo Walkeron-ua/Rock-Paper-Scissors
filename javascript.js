@@ -9,57 +9,69 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let choice;
-    do {
-        choice = prompt("Type one of three value: Rock, Paper or Scissors");
-        choice = choice[0].toUpperCase() + choice.slice(1).toLowerCase();
-    } while (!["Rock", "Paper", "Scissors"].includes(choice));
-    return choice;
-    
-}
-
-function playRound(humanChoice, computerChoice, scores) {
+function playRound(humanChoice, scores) {
+    const computerChoice = getComputerChoice();
     let { humanScore, computerScore } = scores;
     let result;
-
+    
     if (humanChoice === computerChoice) {
         result = "WoW! You both picked the same.";
     }else if (
         (humanChoice === "Paper" && computerChoice === "Rock") ||
         (humanChoice === "Scissors" && computerChoice === "Paper") ||
         (humanChoice === "Rock" && computerChoice === "Scissors")
-    ) {
+    ){
         humanScore++;
-        result = `${humanChoice} beats ${computerChoice}. You Win!`;
+        result = `${humanChoice} beats ${computerChoice}. You win!`;
     }else {
         computerScore++;
-        result = `${computerChoice} beats ${humanChoice}. You Lose!`;
+        result = `${computerChoice} beats ${humanChoice}. You lose!`;
     }
-
-    return { humanScore, computerScore, result };
+    console.log(`${result}\nYour Score: ${humanScore} | Computer Score: ${computerScore}`);
+    if (humanScore == 5 || computerScore == 5) {
+        if (humanScore > computerScore) {
+            console.log(`Congratulation! You Win this game.`);
+        }else {
+            console.log(`Oh No! You Lose this game.`);
+        }
+        return { gameOver: true, humanScore, computerScore};
+    }
+    return { gameOver: false, humanScore, computerScore };
 }
 
 function playGame() {
     let scores = { humanScore: 0, computerScore: 0 };
-    for (let i = 1; i <= 5; i++) {
-        const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice();
-        const { humanScore, computerScore, result } = playRound(humanChoice, computerChoice, scores);
-
-        scores.humanScore = humanScore;
+    
+    const paperBtn = document.querySelector("#paperBtn");
+    const scissorsBtn = document.querySelector("#scissorsBtn");
+    const rockBtn = document.querySelector("#rockBtn");
+    
+    paperBtn.addEventListener("click", () => { 
+        const { gameOver, humanScore, computerScore } = playRound("Paper", scores);
         scores.computerScore = computerScore;
-
-        console.log(`${result}\nYour Score: ${scores.humanScore} | Computer Score: ${scores.computerScore}\nRound: ${i}/5`);
-    }
-
-    if (scores.humanScore > scores.computerScore) {
-        console.log(`Congratulation! You Win this game.`);
-    }else if (scores.humanScore < scores.computerScore) {
-        console.log(`Oh No! You Lose this game.`);
-    }else {
-        console.log(`WoW! You both have same score. It's Draw.`);
-    }
+        scores.humanScore = humanScore;
+        if (gameOver) { 
+            return scores.computerScore = 0, scores.humanScore = 0;
+        }
+    });
+    scissorsBtn.addEventListener("click", () => { 
+        const { gameOver, humanScore, computerScore } = playRound("Scissors", scores);
+        scores.computerScore = computerScore;
+        scores.humanScore = humanScore;
+        if (gameOver) { 
+            return scores.computerScore = 0, scores.humanScore = 0;
+        }
+    });
+    rockBtn.addEventListener("click", () => { 
+        const { gameOver, humanScore, computerScore } = playRound("Rock", scores);
+        scores.computerScore = computerScore;
+        scores.humanScore = humanScore;
+        if (gameOver) { 
+            return scores.computerScore = 0, scores.humanScore = 0;
+        }
+    });
+    
 }
 
 playGame();
+
